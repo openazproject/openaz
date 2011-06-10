@@ -14,6 +14,7 @@
 		<module>openaz-examples</module>
 		<module>openaz-pdp</module>
 		<module>openaz-pep</module>
+		<module>spring-test</module>
 	</modules>
 
 	<build>
