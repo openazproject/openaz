@@ -1,0 +1,1026 @@
+<PolicySet PolicySetId="OpenAz-TopLevelPolicySet-Line-1" PolicyCombiningAlgId="urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:ordered-permit-overrides">
+  <Description>PolicySet at Line Number 1</Description>
+  <Target>
+    <Subjects>
+      <AnySubject/>
+    </Subjects>
+    <Resources>
+      <AnyResource/>
+    </Resources>
+    <Actions>
+      <AnyAction/>
+    </Actions>
+  </Target>
+  <PolicySet PolicySetId="TestAzApi-GeneratedPolicySet-Line-3" PolicyCombiningAlgId="urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:ordered-permit-overrides">
+    <Description>PolicySet at Line Number 3</Description>
+    <Target>
+      <Subjects>
+        <AnySubject/>
+      </Subjects>
+      <Resources>
+        <AnyResource/>
+      </Resources>
+      <Actions>
+        <AnyAction/>
+      </Actions>
+    </Target>
+    <Policy PolicyId="TestAzApi-GeneratedPolicy-Line-5" RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:ordered-permit-overrides">
+      <Description>Policy at Line Number 5</Description>
+<PolicyDefaults><XPathVersion>http://www.w3.org/TR/1999/Rec-xpath-19991116</XPathVersion></PolicyDefaults>
+      <Target>
+        <Subjects>
+          <Subject>
+            <SubjectMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+              <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Joe User</AttributeValue>
+              <SubjectAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+            </SubjectMatch>
+          </Subject>
+          <Subject>
+            <SubjectMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+              <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">josh</AttributeValue>
+              <SubjectAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+            </SubjectMatch>
+          </Subject>
+          <Subject>
+            <SubjectMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:rfc822Name-match">
+              <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">users.example.com</AttributeValue>
+              <SubjectAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id" DataType="urn:oasis:names:tc:xacml:1.0:data-type:rfc822Name"/>
+            </SubjectMatch>
+          </Subject>
+          <Subject>
+            <SubjectMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:x500Name-match">
+              <AttributeValue DataType="urn:oasis:names:tc:xacml:1.0:data-type:x500Name">CN=Rich,OU=Identity Management,O=Oracle,C=US</AttributeValue>
+              <SubjectAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id" DataType="urn:oasis:names:tc:xacml:1.0:data-type:x500Name"/>
+            </SubjectMatch>
+          </Subject>
+        </Subjects>
+        <Resources>
+          <Resource>
+            <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:anyURI-equal">
+              <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#anyURI">http://www.example.com/toplevel</AttributeValue>
+              <ResourceAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" DataType="http://www.w3.org/2001/XMLSchema#anyURI"/>
+            </ResourceMatch>
+          </Resource>
+          <Resource>
+            <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+              <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">file:C\toplevel</AttributeValue>
+              <ResourceAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+            </ResourceMatch>
+          </Resource>
+          <Resource>
+            <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+              <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">file:///C/toplevel/permissionTest</AttributeValue>
+              <ResourceAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+            </ResourceMatch>
+            <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+              <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">java.io.FilePermission</AttributeValue>
+              <ResourceAttributeDesignator AttributeId="urn:openaz:names:xacml:1.0:resource:resource-type" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+            </ResourceMatch>
+          </Resource>
+          <Resource>
+            <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:regexp-string-match">
+              <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">file:///C/toplevel/permissionTest/.*</AttributeValue>
+              <ResourceAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+            </ResourceMatch>
+            <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+              <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">java.io.FilePermission</AttributeValue>
+              <ResourceAttributeDesignator AttributeId="urn:openaz:names:xacml:1.0:resource:resource-type" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+            </ResourceMatch>
+          </Resource>
+          <Resource>
+            <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+              <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">file:\\toplevel00</AttributeValue>
+              <ResourceAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+            </ResourceMatch>
+          </Resource>
+          <Resource>
+            <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+              <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">file:\\toplevel01</AttributeValue>
+              <ResourceAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+            </ResourceMatch>
+          </Resource>
+          <Resource>
+            <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:regexp-string-match">
+              <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">file:\\\\toplevel.*\\</AttributeValue>
+              <ResourceAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+            </ResourceMatch>
+          </Resource>
+        </Resources>
+        <Actions>
+          <AnyAction/>
+        </Actions>
+      </Target>
+      <Rule RuleId="ReadRule-Line-21" Effect="Permit">
+        <Target>
+          <Subjects>
+            <AnySubject/>
+          </Subjects>
+          <Resources>
+            <AnyResource/>
+          </Resources>
+          <Actions>
+            <Action>
+              <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Read</AttributeValue>
+                <ActionAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </ActionMatch>
+            </Action>
+            <Action>
+              <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">read</AttributeValue>
+                <ActionAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </ActionMatch>
+            </Action>
+          </Actions>
+        </Target>
+      </Rule>
+      <Rule RuleId="WriteRule-Line-25" Effect="Permit">
+        <Target>
+          <Subjects>
+            <AnySubject/>
+          </Subjects>
+          <Resources>
+            <AnyResource/>
+          </Resources>
+          <Actions>
+            <Action>
+              <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">write</AttributeValue>
+                <ActionAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </ActionMatch>
+            </Action>
+            <Action>
+              <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Write</AttributeValue>
+                <ActionAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </ActionMatch>
+            </Action>
+          </Actions>
+        </Target>
+        <Condition FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+          <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-one-and-only">
+            <SubjectAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:subject:authn-locality:authentication-method" DataType="http://www.w3.org/2001/XMLSchema#string" Issuer="orcl-weblogic"/>
+          </Apply>
+          <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">password</AttributeValue>
+        </Condition>
+      </Rule>
+      <Rule RuleId="RoleWriteRule-Line-31" Effect="Permit">
+        <Target>
+          <Subjects>
+            <AnySubject/>
+          </Subjects>
+          <Resources>
+            <AnyResource/>
+          </Resources>
+          <Actions>
+            <Action>
+              <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">write</AttributeValue>
+                <ActionAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </ActionMatch>
+            </Action>
+            <Action>
+              <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Write</AttributeValue>
+                <ActionAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </ActionMatch>
+            </Action>
+          </Actions>
+        </Target>
+        <Condition FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+          <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-one-and-only">
+            <SubjectAttributeDesignator AttributeId="urn:openaz:names:xacml:1.0:subject:role-id" DataType="http://www.w3.org/2001/XMLSchema#string" Issuer="orcl-weblogic"/>
+          </Apply>
+          <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">developer</AttributeValue>
+        </Condition>
+      </Rule>
+      <Rule RuleId="CommitRule-Line-37" Effect="Permit">
+        <Target>
+          <Subjects>
+            <AnySubject/>
+          </Subjects>
+          <Resources>
+            <AnyResource/>
+          </Resources>
+          <Actions>
+            <Action>
+              <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">commit</AttributeValue>
+                <ActionAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </ActionMatch>
+            </Action>
+          </Actions>
+        </Target>
+        <Condition FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+          <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-one-and-only">
+            <SubjectAttributeDesignator AttributeId="group" DataType="http://www.w3.org/2001/XMLSchema#string" Issuer="admin@users.example.com"/>
+          </Apply>
+          <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">developers</AttributeValue>
+        </Condition>
+      </Rule>
+      <Rule RuleId="Final-Line-42" Effect="Deny">
+        <Target>
+          <Subjects>
+            <AnySubject/>
+          </Subjects>
+          <Resources>
+            <AnyResource/>
+          </Resources>
+          <Actions>
+            <AnyAction/>
+          </Actions>
+        </Target>
+      </Rule>
+      <Obligations>
+        <Obligation ObligationId="LogSuccessfulAccess-Line-45" FulfillOn="Permit">
+          <AttributeAssignment AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id" DataType="http://www.w3.org/2001/XMLSchema#anyURI">user</AttributeAssignment>
+          <AttributeAssignment AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" DataType="http://www.w3.org/2001/XMLSchema#anyURI">resource</AttributeAssignment>
+          <AttributeAssignment AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id" DataType="http://www.w3.org/2001/XMLSchema#string">&lt;SubjectAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id" DataType="http://www.w3.org/2001/XMLSchema#string"/&gt;</AttributeAssignment>
+        </Obligation>
+        <Obligation ObligationId="LogDeniedAccess-Line-49" FulfillOn="Deny">
+          <AttributeAssignment AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id" DataType="http://www.w3.org/2001/XMLSchema#anyURI">user</AttributeAssignment>
+          <AttributeAssignment AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" DataType="http://www.w3.org/2001/XMLSchema#anyURI">resource</AttributeAssignment>
+          <AttributeAssignment AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" DataType="http://www.w3.org/2001/XMLSchema#anyURI">action</AttributeAssignment>
+        </Obligation>
+      </Obligations>
+    </Policy>
+  </PolicySet>
+  <PolicySet PolicySetId="QueryTest-Policy-Based-PolicySet-Line-53" PolicyCombiningAlgId="urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:ordered-permit-overrides">
+    <Description>PolicySet at Line Number 53</Description>
+    <Target>
+      <Subjects>
+        <AnySubject/>
+      </Subjects>
+      <Resources>
+        <AnyResource/>
+      </Resources>
+      <Actions>
+        <AnyAction/>
+      </Actions>
+    </Target>
+    <PolicySet PolicySetId="QueryTest-User1-PolicySet-Line-55" PolicyCombiningAlgId="urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:deny-overrides">
+      <Description>PolicySet at Line Number 55</Description>
+      <Target>
+        <Subjects>
+          <Subject>
+            <SubjectMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+              <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">User1</AttributeValue>
+              <SubjectAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+            </SubjectMatch>
+          </Subject>
+        </Subjects>
+        <Resources>
+          <AnyResource/>
+        </Resources>
+        <Actions>
+          <AnyAction/>
+        </Actions>
+      </Target>
+      <PolicySet PolicySetId="QueryTest-User1-Rule1-PolicySet-Line-58" PolicyCombiningAlgId="urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:ordered-permit-overrides">
+        <Description>PolicySet at Line Number 58</Description>
+        <Target>
+          <Subjects>
+            <AnySubject/>
+          </Subjects>
+          <Resources>
+            <Resource>
+              <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:regexp-string-match">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">http://www.example.com/A/B/.*</AttributeValue>
+                <ResourceAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </ResourceMatch>
+              <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">test.objects.TestResourcePermission</AttributeValue>
+                <ResourceAttributeDesignator AttributeId="urn:openaz:names:xacml:1.0:resource:resource-type" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </ResourceMatch>
+            </Resource>
+            <Resource>
+              <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">/-</AttributeValue>
+                <ResourceAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </ResourceMatch>
+              <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">test.objects.TestResourcePermission</AttributeValue>
+                <ResourceAttributeDesignator AttributeId="urn:openaz:names:xacml:1.0:resource:resource-type" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </ResourceMatch>
+            </Resource>
+          </Resources>
+          <Actions>
+            <AnyAction/>
+          </Actions>
+        </Target>
+        <Policy PolicyId="Policy-User1-Rule1-Line-64" RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:ordered-permit-overrides">
+          <Description>Policy at Line Number 64</Description>
+<PolicyDefaults><XPathVersion>http://www.w3.org/TR/1999/Rec-xpath-19991116</XPathVersion></PolicyDefaults>
+          <Target>
+            <Subjects>
+              <AnySubject/>
+            </Subjects>
+            <Resources>
+              <Resource>
+                <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:regexp-string-match">
+                  <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">http://www.example.com/A/B/.*</AttributeValue>
+                  <ResourceAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+                </ResourceMatch>
+                <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                  <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">test.objects.TestResourcePermission</AttributeValue>
+                  <ResourceAttributeDesignator AttributeId="urn:openaz:names:xacml:1.0:resource:resource-type" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+                </ResourceMatch>
+              </Resource>
+            </Resources>
+            <Actions>
+              <AnyAction/>
+            </Actions>
+          </Target>
+          <Rule RuleId="Final-Line-69" Effect="Permit">
+            <Target>
+              <Subjects>
+                <AnySubject/>
+              </Subjects>
+              <Resources>
+                <AnyResource/>
+              </Resources>
+              <Actions>
+                <AnyAction/>
+              </Actions>
+            </Target>
+          </Rule>
+          <Obligations>
+            <Obligation ObligationId="LogSuccessfulAccess-Line-72" FulfillOn="Permit">
+              <AttributeAssignment AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id" DataType="http://www.w3.org/2001/XMLSchema#anyURI">User1</AttributeAssignment>
+              <AttributeAssignment AttributeId="urn:openaz:names:xacml:1.0:resource:resource-type" DataType="http://www.w3.org/2001/XMLSchema#anyURI">test.objects.TestResourcePermission</AttributeAssignment>
+            </Obligation>
+          </Obligations>
+        </Policy>
+        <Policy PolicyId="Policy-User1-Rule1-Query-Line-75" RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:ordered-permit-overrides">
+          <Description>Policy at Line Number 75</Description>
+<PolicyDefaults><XPathVersion>http://www.w3.org/TR/1999/Rec-xpath-19991116</XPathVersion></PolicyDefaults>
+          <Target>
+            <Subjects>
+              <AnySubject/>
+            </Subjects>
+            <Resources>
+              <Resource>
+                <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                  <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">/-</AttributeValue>
+                  <ResourceAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+                </ResourceMatch>
+                <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                  <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">test.objects.TestResourcePermission</AttributeValue>
+                  <ResourceAttributeDesignator AttributeId="urn:openaz:names:xacml:1.0:resource:resource-type" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+                </ResourceMatch>
+              </Resource>
+            </Resources>
+            <Actions>
+              <AnyAction/>
+            </Actions>
+          </Target>
+          <Rule RuleId="Final-Line-80" Effect="Permit">
+            <Target>
+              <Subjects>
+                <AnySubject/>
+              </Subjects>
+              <Resources>
+                <AnyResource/>
+              </Resources>
+              <Actions>
+                <AnyAction/>
+              </Actions>
+            </Target>
+          </Rule>
+          <Obligations>
+            <Obligation ObligationId="LogSuccessfulAccessQuery-Line-83" FulfillOn="Permit">
+              <AttributeAssignment AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id" DataType="http://www.w3.org/2001/XMLSchema#anyURI">User1</AttributeAssignment>
+              <AttributeAssignment AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" DataType="http://www.w3.org/2001/XMLSchema#anyURI">http://www.example.com/A/B/.*</AttributeAssignment>
+              <AttributeAssignment AttributeId="urn:openaz:names:xacml:1.0:resource:resource-type" DataType="http://www.w3.org/2001/XMLSchema#anyURI">test.objects.TestResourcePermission</AttributeAssignment>
+            </Obligation>
+          </Obligations>
+        </Policy>
+      </PolicySet>
+      <PolicySet PolicySetId="QueryTest-User1-Rule2-PolicySet-Line-87" PolicyCombiningAlgId="urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:ordered-permit-overrides">
+        <Description>PolicySet at Line Number 87</Description>
+        <Target>
+          <Subjects>
+            <AnySubject/>
+          </Subjects>
+          <Resources>
+            <AnyResource/>
+          </Resources>
+          <Actions>
+            <AnyAction/>
+          </Actions>
+        </Target>
+        <Policy PolicyId="Policy-User1-Rule2-Line-89" RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:ordered-permit-overrides">
+          <Description>Policy at Line Number 89</Description>
+<PolicyDefaults><XPathVersion>http://www.w3.org/TR/1999/Rec-xpath-19991116</XPathVersion></PolicyDefaults>
+          <Target>
+            <Subjects>
+              <AnySubject/>
+            </Subjects>
+            <Resources>
+              <Resource>
+                <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:regexp-string-match">
+                  <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">http://www.example.com/A/D/.*</AttributeValue>
+                  <ResourceAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+                </ResourceMatch>
+                <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                  <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">test.objects.TestResourcePermission</AttributeValue>
+                  <ResourceAttributeDesignator AttributeId="urn:openaz:names:xacml:1.0:resource:resource-type" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+                </ResourceMatch>
+              </Resource>
+            </Resources>
+            <Actions>
+              <AnyAction/>
+            </Actions>
+          </Target>
+          <Rule RuleId="Final-Line-94" Effect="Permit">
+            <Target>
+              <Subjects>
+                <AnySubject/>
+              </Subjects>
+              <Resources>
+                <AnyResource/>
+              </Resources>
+              <Actions>
+                <AnyAction/>
+              </Actions>
+            </Target>
+          </Rule>
+          <Obligations>
+            <Obligation ObligationId="LogSuccessfulAccess-Line-97" FulfillOn="Permit">
+              <AttributeAssignment AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id" DataType="http://www.w3.org/2001/XMLSchema#anyURI">User1</AttributeAssignment>
+              <AttributeAssignment AttributeId="urn:openaz:names:xacml:1.0:resource:resource-type" DataType="http://www.w3.org/2001/XMLSchema#anyURI">test.objects.TestResourcePermission</AttributeAssignment>
+            </Obligation>
+          </Obligations>
+        </Policy>
+        <Policy PolicyId="Policy-User1-Rule2-Query-Line-100" RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:ordered-permit-overrides">
+          <Description>Policy at Line Number 100</Description>
+<PolicyDefaults><XPathVersion>http://www.w3.org/TR/1999/Rec-xpath-19991116</XPathVersion></PolicyDefaults>
+          <Target>
+            <Subjects>
+              <AnySubject/>
+            </Subjects>
+            <Resources>
+              <Resource>
+                <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                  <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">/-</AttributeValue>
+                  <ResourceAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+                </ResourceMatch>
+                <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                  <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">test.objects.TestResourcePermission</AttributeValue>
+                  <ResourceAttributeDesignator AttributeId="urn:openaz:names:xacml:1.0:resource:resource-type" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+                </ResourceMatch>
+              </Resource>
+            </Resources>
+            <Actions>
+              <AnyAction/>
+            </Actions>
+          </Target>
+          <Rule RuleId="Final-Line-105" Effect="Permit">
+            <Target>
+              <Subjects>
+                <AnySubject/>
+              </Subjects>
+              <Resources>
+                <AnyResource/>
+              </Resources>
+              <Actions>
+                <AnyAction/>
+              </Actions>
+            </Target>
+          </Rule>
+          <Obligations>
+            <Obligation ObligationId="LogSuccessfulAccessQuery-Line-108" FulfillOn="Permit">
+              <AttributeAssignment AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id" DataType="http://www.w3.org/2001/XMLSchema#anyURI">User1</AttributeAssignment>
+              <AttributeAssignment AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" DataType="http://www.w3.org/2001/XMLSchema#anyURI">http://www.example.com/A/D/.*</AttributeAssignment>
+              <AttributeAssignment AttributeId="urn:openaz:names:xacml:1.0:resource:resource-type" DataType="http://www.w3.org/2001/XMLSchema#anyURI">test.objects.TestResourcePermission</AttributeAssignment>
+            </Obligation>
+          </Obligations>
+        </Policy>
+      </PolicySet>
+    </PolicySet>
+  </PolicySet>
+  <PolicySet PolicySetId="QueryTest-Resource-Based-PolicySet-Line-112" PolicyCombiningAlgId="urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:ordered-permit-overrides">
+    <Description>PolicySet at Line Number 112</Description>
+    <Target>
+      <Subjects>
+        <AnySubject/>
+      </Subjects>
+      <Resources>
+        <Resource>
+          <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+            <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">EngineeringServer</AttributeValue>
+            <ResourceAttributeDesignator AttributeId="urn:openaz:names:xacml:1.0:resource:resource-type" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+          </ResourceMatch>
+        </Resource>
+        <Resource>
+          <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+            <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Menu</AttributeValue>
+            <ResourceAttributeDesignator AttributeId="urn:openaz:names:xacml:1.0:resource:resource-type" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+          </ResourceMatch>
+        </Resource>
+        <Resource>
+          <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+            <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">FrisBee</AttributeValue>
+            <ResourceAttributeDesignator AttributeId="urn:openaz:names:xacml:1.0:resource:resource-type" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+          </ResourceMatch>
+        </Resource>
+      </Resources>
+      <Actions>
+        <AnyAction/>
+      </Actions>
+    </Target>
+    <Policy PolicyId="Policy-EngineeringServer-Query-Line-117" RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:ordered-permit-overrides">
+      <Description>Policy at Line Number 117</Description>
+<PolicyDefaults><XPathVersion>http://www.w3.org/TR/1999/Rec-xpath-19991116</XPathVersion></PolicyDefaults>
+      <Target>
+        <Subjects>
+          <AnySubject/>
+        </Subjects>
+        <Resources>
+          <Resource>
+            <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+              <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">EngineeringServer</AttributeValue>
+              <ResourceAttributeDesignator AttributeId="urn:openaz:names:xacml:1.0:resource:resource-type" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+            </ResourceMatch>
+          </Resource>
+        </Resources>
+        <Actions>
+          <AnyAction/>
+        </Actions>
+      </Target>
+      <Rule RuleId="SubjectRule-Line-121" Effect="Permit">
+        <Target>
+          <Subjects>
+            <Subject>
+              <SubjectMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">fred</AttributeValue>
+                <SubjectAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </SubjectMatch>
+            </Subject>
+          </Subjects>
+          <Resources>
+            <Resource>
+              <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">resource-id-EngineeringServer-3</AttributeValue>
+                <ResourceAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </ResourceMatch>
+            </Resource>
+          </Resources>
+          <Actions>
+            <AnyAction/>
+          </Actions>
+        </Target>
+      </Rule>
+      <Rule RuleId="Final-Line-126" Effect="Deny">
+        <Target>
+          <Subjects>
+            <AnySubject/>
+          </Subjects>
+          <Resources>
+            <AnyResource/>
+          </Resources>
+          <Actions>
+            <AnyAction/>
+          </Actions>
+        </Target>
+      </Rule>
+    </Policy>
+    <Policy PolicyId="P7-Policy-Menu-Query-Line-128" RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:ordered-permit-overrides">
+      <Description>Policy at Line Number 128</Description>
+<PolicyDefaults><XPathVersion>http://www.w3.org/TR/1999/Rec-xpath-19991116</XPathVersion></PolicyDefaults>
+      <Target>
+        <Subjects>
+          <AnySubject/>
+        </Subjects>
+        <Resources>
+          <Resource>
+            <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+              <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Menu</AttributeValue>
+              <ResourceAttributeDesignator AttributeId="urn:openaz:names:xacml:1.0:resource:resource-type" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+            </ResourceMatch>
+          </Resource>
+        </Resources>
+        <Actions>
+          <AnyAction/>
+        </Actions>
+      </Target>
+      <Rule RuleId="FinalRule-Line-132" Effect="Deny">
+        <Target>
+          <Subjects>
+            <AnySubject/>
+          </Subjects>
+          <Resources>
+            <AnyResource/>
+          </Resources>
+          <Actions>
+            <AnyAction/>
+          </Actions>
+        </Target>
+      </Rule>
+    </Policy>
+    <Policy PolicyId="P8-Policy-Frisbee-Query-Line-134" RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:ordered-permit-overrides">
+      <Description>Policy at Line Number 134</Description>
+<PolicyDefaults><XPathVersion>http://www.w3.org/TR/1999/Rec-xpath-19991116</XPathVersion></PolicyDefaults>
+      <Target>
+        <Subjects>
+          <AnySubject/>
+        </Subjects>
+        <Resources>
+          <Resource>
+            <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+              <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">FrisBee</AttributeValue>
+              <ResourceAttributeDesignator AttributeId="urn:openaz:names:xacml:1.0:resource:resource-type" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+            </ResourceMatch>
+          </Resource>
+        </Resources>
+        <Actions>
+          <AnyAction/>
+        </Actions>
+      </Target>
+      <Rule RuleId="SubjectRule-Line-138" Effect="Permit">
+        <Target>
+          <Subjects>
+            <Subject>
+              <SubjectMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">fred</AttributeValue>
+                <SubjectAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </SubjectMatch>
+              <SubjectMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">throw</AttributeValue>
+                <SubjectAttributeDesignator AttributeId="urn:openaz:privilege:frisbee" DataType="http://www.w3.org/2001/XMLSchema#string" Issuer="orcl-weblogic" MustBePresent="true"/>
+              </SubjectMatch>
+            </Subject>
+          </Subjects>
+          <Resources>
+            <Resource>
+              <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">resource-id-FrisBee-3</AttributeValue>
+                <ResourceAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </ResourceMatch>
+            </Resource>
+          </Resources>
+          <Actions>
+            <AnyAction/>
+          </Actions>
+        </Target>
+      </Rule>
+      <Rule RuleId="FinalRule-Line-144" Effect="Deny">
+        <Target>
+          <Subjects>
+            <AnySubject/>
+          </Subjects>
+          <Resources>
+            <AnyResource/>
+          </Resources>
+          <Actions>
+            <AnyAction/>
+          </Actions>
+        </Target>
+      </Rule>
+    </Policy>
+  </PolicySet>
+  <PolicySet PolicySetId="OAuth2-TopLevel-PolicySet-Line-146" PolicyCombiningAlgId="urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:ordered-permit-overrides">
+    <Description>PolicySet at Line Number 146: (PS10,in=PS1)</Description>
+    <Target>
+      <Subjects>
+        <AnySubject/>
+      </Subjects>
+      <Resources>
+        <AnyResource/>
+      </Resources>
+      <Actions>
+        <AnyAction/>
+      </Actions>
+    </Target>
+    <PolicySet PolicySetId="OAuth2-Val-URI-PolicySet-Line-148" PolicyCombiningAlgId="urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:deny-overrides">
+      <Description>PolicySet at Line Number 148: (PS10-1,in=PS10)</Description>
+      <Target>
+        <Subjects>
+          <AnySubject/>
+        </Subjects>
+        <Resources>
+          <Resource>
+            <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+              <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">http://az-svr/vl-endpt/</AttributeValue>
+              <ResourceAttributeDesignator AttributeId="vl-endpt-uri" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+            </ResourceMatch>
+          </Resource>
+        </Resources>
+        <Actions>
+          <AnyAction/>
+        </Actions>
+      </Target>
+      <Policy PolicyId="OAuth2-Val-URI-NoToken-Policy-Line-151" RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:ordered-permit-overrides">
+        <Description>Policy at Line Number 151: (P10-1-1,in=PS10-1)</Description>
+<PolicyDefaults><XPathVersion>http://www.w3.org/TR/1999/Rec-xpath-19991116</XPathVersion></PolicyDefaults>
+        <Target>
+          <Subjects>
+            <Subject>
+              <SubjectMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">http://res-svr/</AttributeValue>
+                <SubjectAttributeDesignator AttributeId="res-svr" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </SubjectMatch>
+              <SubjectMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:boolean-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#boolean">false</AttributeValue>
+                <SubjectAttributeDesignator AttributeId="token-present" DataType="http://www.w3.org/2001/XMLSchema#boolean"/>
+              </SubjectMatch>
+            </Subject>
+          </Subjects>
+          <Resources>
+            <Resource>
+              <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:regexp-string-match">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">http://res-svr/.*</AttributeValue>
+                <ResourceAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </ResourceMatch>
+            </Resource>
+          </Resources>
+          <Actions>
+            <AnyAction/>
+          </Actions>
+        </Target>
+        <Rule RuleId="FinalRule-Line-157" Effect="Permit">
+          <Target>
+            <Subjects>
+              <AnySubject/>
+            </Subjects>
+            <Resources>
+              <AnyResource/>
+            </Resources>
+            <Actions>
+              <AnyAction/>
+            </Actions>
+          </Target>
+        </Rule>
+        <Obligations>
+          <Obligation ObligationId="ReturnAzEndpointURI-Line-160" FulfillOn="Permit">
+            <AttributeAssignment AttributeId="az-endpt-uri" DataType="http://www.w3.org/2001/XMLSchema#anyURI">http://az-svr/az-endpt/</AttributeAssignment>
+          </Obligation>
+        </Obligations>
+      </Policy>
+      <Policy PolicyId="OAuth2-Val-URI-Token-Policy-Line-162" RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:ordered-permit-overrides">
+        <Description>Policy at Line Number 162: (P10-1-2,in=PS10-1)</Description>
+<PolicyDefaults><XPathVersion>http://www.w3.org/TR/1999/Rec-xpath-19991116</XPathVersion></PolicyDefaults>
+        <Target>
+          <Subjects>
+            <Subject>
+              <SubjectMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">http://res-svr/</AttributeValue>
+                <SubjectAttributeDesignator AttributeId="res-svr" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </SubjectMatch>
+              <SubjectMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:boolean-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#boolean">true</AttributeValue>
+                <SubjectAttributeDesignator AttributeId="token-present" DataType="http://www.w3.org/2001/XMLSchema#boolean"/>
+              </SubjectMatch>
+              <SubjectMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:boolean-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#boolean">true</AttributeValue>
+                <SubjectAttributeDesignator AttributeId="token-valid" DataType="http://www.w3.org/2001/XMLSchema#boolean"/>
+              </SubjectMatch>
+            </Subject>
+          </Subjects>
+          <Resources>
+            <Resource>
+              <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">oauth-access-token-confirmation</AttributeValue>
+                <ResourceAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </ResourceMatch>
+            </Resource>
+          </Resources>
+          <Actions>
+            <Action>
+              <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">return-token-confirmation</AttributeValue>
+                <ActionAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </ActionMatch>
+            </Action>
+          </Actions>
+        </Target>
+        <Rule RuleId="FinalRule-Line-170" Effect="Permit">
+          <Target>
+            <Subjects>
+              <AnySubject/>
+            </Subjects>
+            <Resources>
+              <AnyResource/>
+            </Resources>
+            <Actions>
+              <AnyAction/>
+            </Actions>
+          </Target>
+        </Rule>
+        <Obligations>
+          <Obligation ObligationId="ReturnAccessTokenValid-Line-173" FulfillOn="Permit">
+            <AttributeAssignment AttributeId="return-confirmation" DataType="http://www.w3.org/2001/XMLSchema#boolean">true</AttributeAssignment>
+          </Obligation>
+        </Obligations>
+      </Policy>
+    </PolicySet>
+    <PolicySet PolicySetId="OAuth2-Az-URI-PolicySet-Line-175" PolicyCombiningAlgId="urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:deny-overrides">
+      <Description>PolicySet at Line Number 175: (PS10-2,in=PS10)</Description>
+      <Target>
+        <Subjects>
+          <AnySubject/>
+        </Subjects>
+        <Resources>
+          <Resource>
+            <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+              <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">http://az-svr/az-endpt/</AttributeValue>
+              <ResourceAttributeDesignator AttributeId="az-endpt-uri" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+            </ResourceMatch>
+          </Resource>
+        </Resources>
+        <Actions>
+          <AnyAction/>
+        </Actions>
+      </Target>
+      <Policy PolicyId="OAuth2-Az-URI-client-id-Policy-Line-178" RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:ordered-permit-overrides">
+        <Description>Policy at Line Number 178: (P10-2-1,in=PS10-2)</Description>
+<PolicyDefaults><XPathVersion>http://www.w3.org/TR/1999/Rec-xpath-19991116</XPathVersion></PolicyDefaults>
+        <Target>
+          <Subjects>
+            <Subject>
+              <SubjectMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:regexp-string-match">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">.*</AttributeValue>
+                <SubjectAttributeDesignator AttributeId="client-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </SubjectMatch>
+              <SubjectMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:boolean-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#boolean">true</AttributeValue>
+                <SubjectAttributeDesignator AttributeId="scope-provided" DataType="http://www.w3.org/2001/XMLSchema#boolean"/>
+              </SubjectMatch>
+            </Subject>
+          </Subjects>
+          <Resources>
+            <Resource>
+              <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:regexp-string-match">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">http://res-svr/.*</AttributeValue>
+                <ResourceAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </ResourceMatch>
+            </Resource>
+          </Resources>
+          <Actions>
+            <AnyAction/>
+          </Actions>
+        </Target>
+        <Rule RuleId="FinalRule-Line-184" Effect="Permit">
+          <Target>
+            <Subjects>
+              <AnySubject/>
+            </Subjects>
+            <Resources>
+              <AnyResource/>
+            </Resources>
+            <Actions>
+              <AnyAction/>
+            </Actions>
+          </Target>
+        </Rule>
+        <Obligations>
+          <Obligation ObligationId="GetResourceOwnerAuthorization-Line-187" FulfillOn="Permit">
+            <AttributeAssignment AttributeId="az-endpt-uri" DataType="http://www.w3.org/2001/XMLSchema#anyURI">http://az-svr/az-endpt/</AttributeAssignment>
+          </Obligation>
+        </Obligations>
+      </Policy>
+      <Policy PolicyId="OAuth2-Az-URI-res-own-az-Policy-Line-189" RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:ordered-permit-overrides">
+        <Description>Policy at Line Number 189: (P10-2-2,in=PS10-2)</Description>
+<PolicyDefaults><XPathVersion>http://www.w3.org/TR/1999/Rec-xpath-19991116</XPathVersion></PolicyDefaults>
+        <Target>
+          <Subjects>
+            <Subject>
+              <SubjectMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">OaResOwner01</AttributeValue>
+                <SubjectAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </SubjectMatch>
+              <SubjectMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:regexp-string-match">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">.*</AttributeValue>
+                <SubjectAttributeDesignator AttributeId="subject-creds" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </SubjectMatch>
+              <SubjectMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:boolean-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#boolean">true</AttributeValue>
+                <SubjectAttributeDesignator AttributeId="subject-authenticated" DataType="http://www.w3.org/2001/XMLSchema#boolean" MustBePresent="true"/>
+              </SubjectMatch>
+            </Subject>
+          </Subjects>
+          <Resources>
+            <Resource>
+              <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:regexp-string-match">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">http://res-svr/OaResOwner01/.*</AttributeValue>
+                <ResourceAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </ResourceMatch>
+            </Resource>
+          </Resources>
+          <Actions>
+            <Action>
+              <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:regexp-string-match">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">.*</AttributeValue>
+                <ActionAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </ActionMatch>
+              <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">approve-client</AttributeValue>
+                <ActionAttributeDesignator AttributeId="oa-act-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </ActionMatch>
+              <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:regexp-string-match">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">.*</AttributeValue>
+                <ActionAttributeDesignator AttributeId="client-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </ActionMatch>
+            </Action>
+          </Actions>
+        </Target>
+        <Rule RuleId="FinalRule-Line-199" Effect="Permit">
+          <Target>
+            <Subjects>
+              <AnySubject/>
+            </Subjects>
+            <Resources>
+              <AnyResource/>
+            </Resources>
+            <Actions>
+              <AnyAction/>
+            </Actions>
+          </Target>
+        </Rule>
+        <Obligations>
+          <Obligation ObligationId="AuthorizationCode-Line-202" FulfillOn="Permit">
+            <AttributeAssignment AttributeId="gen-az-code" DataType="http://www.w3.org/2001/XMLSchema#anyURI">requested-resource</AttributeAssignment>
+          </Obligation>
+        </Obligations>
+      </Policy>
+    </PolicySet>
+    <PolicySet PolicySetId="OAuth2-Tk-URI-PolicySet-Line-204" PolicyCombiningAlgId="urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:deny-overrides">
+      <Description>PolicySet at Line Number 204: (PS10-3,in=PS10)</Description>
+      <Target>
+        <Subjects>
+          <AnySubject/>
+        </Subjects>
+        <Resources>
+          <Resource>
+            <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+              <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">http://az-svr/tk-endpt/</AttributeValue>
+              <ResourceAttributeDesignator AttributeId="tk-endpt-uri" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+            </ResourceMatch>
+          </Resource>
+        </Resources>
+        <Actions>
+          <AnyAction/>
+        </Actions>
+      </Target>
+      <Policy PolicyId="OAuth2-Tk-URI-NoToken-Policy-Line-207" RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:ordered-permit-overrides">
+        <Description>Policy at Line Number 207: (P10-3-1,in=PS10-3)</Description>
+<PolicyDefaults><XPathVersion>http://www.w3.org/TR/1999/Rec-xpath-19991116</XPathVersion></PolicyDefaults>
+        <Target>
+          <Subjects>
+            <Subject>
+              <SubjectMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">http://www.client01.com</AttributeValue>
+                <SubjectAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </SubjectMatch>
+              <SubjectMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:regexp-string-match">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">.*</AttributeValue>
+                <SubjectAttributeDesignator AttributeId="subject-creds" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </SubjectMatch>
+              <SubjectMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:boolean-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#boolean">true</AttributeValue>
+                <SubjectAttributeDesignator AttributeId="subject-authenticated" DataType="http://www.w3.org/2001/XMLSchema#boolean" MustBePresent="true"/>
+              </SubjectMatch>
+              <SubjectMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:boolean-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#boolean">true</AttributeValue>
+                <SubjectAttributeDesignator AttributeId="az-code-provided" DataType="http://www.w3.org/2001/XMLSchema#boolean" MustBePresent="true"/>
+              </SubjectMatch>
+              <SubjectMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:boolean-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#boolean">true</AttributeValue>
+                <SubjectAttributeDesignator AttributeId="az-code-validated" DataType="http://www.w3.org/2001/XMLSchema#boolean" MustBePresent="true"/>
+              </SubjectMatch>
+            </Subject>
+          </Subjects>
+          <Resources>
+            <Resource>
+              <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">oauth-access-token</AttributeValue>
+                <ResourceAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </ResourceMatch>
+            </Resource>
+          </Resources>
+          <Actions>
+            <Action>
+              <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">return-access-token</AttributeValue>
+                <ActionAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+              </ActionMatch>
+            </Action>
+          </Actions>
+        </Target>
+        <Rule RuleId="FinalRule-Line-217" Effect="Permit">
+          <Target>
+            <Subjects>
+              <AnySubject/>
+            </Subjects>
+            <Resources>
+              <AnyResource/>
+            </Resources>
+            <Actions>
+              <AnyAction/>
+            </Actions>
+          </Target>
+        </Rule>
+      </Policy>
+    </PolicySet>
+  </PolicySet>
+</PolicySet>

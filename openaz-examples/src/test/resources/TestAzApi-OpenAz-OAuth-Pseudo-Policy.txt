@@ -1,0 +1,290 @@
+    // Policies for OpenAz: Version 115-001
+    // OpenAz policies written in "Xacml Shorthand", which can be "compiled"
+    // into Xacml XML using OpenAzPolicyReader
+    // some abbreviations:  rgx-mt = regular expression match
+    //                      mbp:f  = MustBePresent = false
+    //                      mlev:n = PolicySet level 0->n, where 0 is root policy set
+    //                               which enables/defines the hierarchical structure
+
+    PolicySet (PS1,in:PS1) ( cb:opo id:OpenAz-TopLevelPolicySet mlev:0)
+      Target(PolicySet)
+    PolicySet (PS2,in:PS1) ( cb:opo id:TestAzApi-GeneratedPolicySet mlev:1)
+      Target(PolicySet)
+      Policy (P1,in:PS2) ( cb:ord-po id:TestAzApi-GeneratedPolicy )
+        Target(Policy)
+          TS (sub-id,"Joe User" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+          TS (sub-id,"josh" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+          TS (sub-id,"users.example.com" dt:rfc822 mtId:rf8-eq fnId:! issuer:! mbp:f )
+          TS (sub-id,"CN=Rich,OU=Identity Management,O=Oracle,C=US" dt:x500name mtId:x50-eq fnId:! issuer:! mbp:f )
+          TR (res-id,"http://www.example.com/toplevel" dt:anyURI mtId:uri-eq fnId:! issuer:! mbp:f )
+          TR (res-id,"file:C\toplevel" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+          TR (res-id,"file:///C/toplevel/permissionTest" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+           + (az-res-typ,"java.io.FilePermission" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+          TR (res-id,"file:///C/toplevel/permissionTest/.*" dt:string mtId:rgx-mt fnId:! issuer:! mbp:f )
+           + (az-res-typ,"java.io.FilePermission" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+          TR (res-id,"file:\\toplevel00" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+          TR (res-id,"file:\\toplevel01" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+          TR (res-id,"file:\\\\toplevel.*\\" dt:string mtId:rgx-mt fnId:! issuer:! mbp:f )
+        Rules(Policy)
+        Rule ( ef:Permit id:ReadRule )
+          Target(Rule)
+            TA (act-id,"Read" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+            TA (act-id,"read" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+        Rule ( ef:Permit id:WriteRule )
+          Target(Rule)
+            TA (act-id,"write" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+            TA (act-id,"Write" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+          Condition(Rule)
+            TS (sub-authn,"password" dt:string mtId:str-eq fnId:1&only issuer:orcl-weblogic mbp:f )
+        Rule ( ef:Permit id:RoleWriteRule )
+          Target(Rule)
+            TA (act-id,"write" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+            TA (act-id,"Write" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+          Condition(Rule)
+            TS (az-sub-role-id,"developer" dt:string mtId:str-eq fnId:1&only issuer:orcl-weblogic mbp:f )
+        Rule ( ef:Permit id:CommitRule )
+          Target(Rule)
+            TA (act-id,"commit" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+          Condition(Rule)
+            TS (group,"developers" dt:string mtId:str-eq fnId:1&only issuer:admin@users.example.com mbp:f )
+        Rule ( ef:Deny id:Final )
+          Target(Rule)
+        Obligations(Policy)
+          Obligation ( fulfillOn:Permit id:LogSuccessfulAccess )
+            OA (sub-id,"user" dt:anyURI mtId:! fnId:! issuer:! mbp:f )
+             + (res-id,"resource" dt:anyURI mtId:! fnId:! issuer:! mbp:f )
+             + (sub-id,"&lt;SubjectAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id" DataType="http://www.w3.org/2001/XMLSchema#string"/&gt;" dt:string mtId:! fnId:! issuer:! mbp:f )
+             // + (sub-id,"&lt;SubjectAttributeDesignator 
+             //    AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
+             //    DataType="http://www.w3.org/2001/XMLSchema#string"/&gt;" 
+             //    dt:string mtId:! fnId:! issuer:! mbp:f )
+          Obligation ( fulfillOn:Deny id:LogDeniedAccess )
+            OA (sub-id,"user" dt:anyURI mtId:! fnId:! issuer:! mbp:f )
+             + (res-id,"resource" dt:anyURI mtId:! fnId:! issuer:! mbp:f )
+             + (act-id,"action" dt:anyURI mtId:! fnId:! issuer:! mbp:f )
+    PolicySet (PS3,in:PS1) ( cb:opo id:QueryTest-Policy-Based-PolicySet mlev:1)
+      Target(PolicySet)
+    PolicySet (PS4,in:PS3) ( cb:do id:QueryTest-User1-PolicySet mlev:2)
+      Target(PolicySet)
+        TS (sub-id,"User1" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+    PolicySet (PS5,in:PS4) ( cb:opo id:QueryTest-User1-Rule1-PolicySet mlev:3)
+      Target(PolicySet)
+        TR (res-id,"http://www.example.com/A/B/.*" dt:string mtId:rgx-mt fnId:! issuer:! mbp:f )
+         + (az-res-typ,"test.objects.TestResourcePermission" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+        TR (res-id,"/-" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+         + (az-res-typ,"test.objects.TestResourcePermission" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+      Policy (P2,in:PS5) ( cb:ord-po id:Policy-User1-Rule1 )
+        Target(Policy)
+          TR (res-id,"http://www.example.com/A/B/.*" dt:string mtId:rgx-mt fnId:! issuer:! mbp:f )
+           + (az-res-typ,"test.objects.TestResourcePermission" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+        Rules(Policy)
+        Rule ( ef:Permit id:Final )
+          Target(Rule)
+        Obligations(Policy)
+          Obligation ( fulfillOn:Permit id:LogSuccessfulAccess )
+            OA (sub-id,"User1" dt:anyURI mtId:! fnId:! issuer:! mbp:f )
+             + (az-res-typ,"test.objects.TestResourcePermission" dt:anyURI mtId:! fnId:! issuer:! mbp:f )
+      Policy (P3,in:PS5) ( cb:ord-po id:Policy-User1-Rule1-Query )
+        Target(Policy)
+          TR (res-id,"/-" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+           + (az-res-typ,"test.objects.TestResourcePermission" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+        Rules(Policy)
+        Rule ( ef:Permit id:Final )
+          Target(Rule)
+        Obligations(Policy)
+          Obligation ( fulfillOn:Permit id:LogSuccessfulAccessQuery )
+            OA (sub-id,"User1" dt:anyURI mtId:! fnId:! issuer:! mbp:f )
+             + (res-id,"http://www.example.com/A/B/.*" dt:anyURI mtId:! fnId:! issuer:! mbp:f )
+             + (az-res-typ,"test.objects.TestResourcePermission" dt:anyURI mtId:! fnId:! issuer:! mbp:f )
+    PolicySet (PS6,in:PS4) ( cb:opo id:QueryTest-User1-Rule2-PolicySet mlev:3)
+      Target(PolicySet)
+      Policy (P4,in:PS6) ( cb:ord-po id:Policy-User1-Rule2 )
+        Target(Policy)
+          TR (res-id,"http://www.example.com/A/D/.*" dt:string mtId:rgx-mt fnId:! issuer:! mbp:f )
+           + (az-res-typ,"test.objects.TestResourcePermission" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+        Rules(Policy)
+        Rule ( ef:Permit id:Final )
+          Target(Rule)
+        Obligations(Policy)
+          Obligation ( fulfillOn:Permit id:LogSuccessfulAccess )
+            OA (sub-id,"User1" dt:anyURI mtId:! fnId:! issuer:! mbp:f )
+             + (az-res-typ,"test.objects.TestResourcePermission" dt:anyURI mtId:! fnId:! issuer:! mbp:f )
+      Policy (P5,in:PS6) ( cb:ord-po id:Policy-User1-Rule2-Query )
+        Target(Policy)
+          TR (res-id,"/-" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+           + (az-res-typ,"test.objects.TestResourcePermission" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+        Rules(Policy)
+        Rule ( ef:Permit id:Final )
+          Target(Rule)
+        Obligations(Policy)
+          Obligation ( fulfillOn:Permit id:LogSuccessfulAccessQuery )
+            OA (sub-id,"User1" dt:anyURI mtId:! fnId:! issuer:! mbp:f )
+             + (res-id,"http://www.example.com/A/D/.*" dt:anyURI mtId:! fnId:! issuer:! mbp:f )
+             + (az-res-typ,"test.objects.TestResourcePermission" dt:anyURI mtId:! fnId:! issuer:! mbp:f )
+    PolicySet (PS7,in:PS1) ( cb:opo id:QueryTest-Resource-Based-PolicySet mlev:1)
+      Target(PolicySet)
+        TR (az-res-typ,"EngineeringServer" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+        TR (az-res-typ,"Menu" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+        TR (az-res-typ,"FrisBee" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+      Policy (P6,in:PS7) ( cb:ord-po id:Policy-EngineeringServer-Query )
+        Target(Policy)
+          TR (az-res-typ,"EngineeringServer" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+        Rules(Policy)
+        Rule ( ef:Permit id:SubjectRule )
+          Target(Rule)
+            TS (sub-id,"fred" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+            TR (res-id,"resource-id-EngineeringServer-3" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+          Condition(Rule)
+        Rule ( ef:Deny id:Final )
+          Target(Rule)
+      Policy (P7,in:PS7) ( cb:ord-po id:P7-Policy-Menu-Query )
+        Target(Policy)
+          TR (az-res-typ,"Menu" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+        Rules(Policy)
+        Rule ( ef:Deny id:FinalRule )
+          Target(Rule)
+      Policy (P8,in:PS7) ( cb:ord-po id:P8-Policy-Frisbee-Query )
+        Target(Policy)
+          TR (az-res-typ,"FrisBee" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+        Rules(Policy)
+        Rule ( ef:Permit id:SubjectRule )
+          Target(Rule)
+            TS (sub-id,"fred" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+             + (urn:openaz:privilege:frisbee,"throw" dt:string mtId:str-eq fnId:! issuer:orcl-weblogic mbp:t )
+            TR (res-id,"resource-id-FrisBee-3" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+          Condition(Rule)
+        Rule ( ef:Deny id:FinalRule )
+          Target(Rule)
+
+    // The following PolicySet, PS10, contains policies that implement an
+    // authorization service for OAuth 2.0, in particular, for the 
+    // "Authorization Code Flow"
+
+    // This PolicySet contains a set of 3 PolicySets for the 3 endpoints
+    PolicySet (PS10,in:PS1) ( cb:opo id:OAuth2-TopLevel-PolicySet mlev:1 desc:PS10,in=PS1 )
+      Target(PolicySet)
+
+    // This PolicySet is for the VALIDATION ENDPOINT (vl-endpt-uri) where the
+    // resource-server will be looking for either a token validation or a redirect uri.
+    // The resource being used is the validation service at vl-endpt-uri
+    PolicySet (PS10-1,in:PS10) ( cb:do id:OAuth2-Val-URI-PolicySet mlev:2 desc:PS10-1,in=PS10 )
+      Target(PolicySet)
+        TR (vl-endpt-uri,"http://az-svr/vl-endpt/" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+
+      // This Policy is when NO TOKEN, return the az-endpt-uri for client to redirect to
+      // the subject making req is "res-svr", different res-svrs might need different
+      // redirect addresses;
+      // no token is present, just a boolean to indicate that
+      // res-id is the resource the client wants, which also might impact the returned uri
+      Policy (P10-1-1,in:PS10-1) ( cb:ord-po id:OAuth2-Val-URI-NoToken-Policy desc:P10-1-1,in=PS10-1 )
+        Target(Policy)
+          TS (res-svr,"http://res-svr/" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+          +  (token-present,"false" dt:boolean mtId:boo-eq fnId:! issuer:! mbp:f )
+          TR (res-id,"http://res-svr/.*" dt:string mtId:rgx-mt fnId:! issuer:! mbp:f )
+        Rules(Policy)
+          Rule ( ef:Permit id:FinalRule )
+            Target(Rule)
+        // Send back the authorization endpoint URI
+        Obligations(Policy)
+          Obligation ( fulfillOn:Permit id:ReturnAzEndpointURI )
+            OA (az-endpt-uri,"http://az-svr/az-endpt/" dt:anyURI mtId:! fnId:! issuer:! mbp:f )
+
+      // This policy is when there is a VALID TOKEN, return the validation result
+      // For this let's assume the PEP validated the token using some token service
+      // and is passing the certified result in order to get go-ahead to return confirm
+      Policy (P10-1-2,in:PS10-1) ( cb:ord-po id:OAuth2-Val-URI-Token-Policy desc:P10-1-2,in=PS10-1 )
+        Target(Policy)
+          TS (res-svr,"http://res-svr/" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+          +  (token-present,"true" dt:boolean mtId:boo-eq fnId:! issuer:! mbp:f )
+          // Note: could have a rule for token not valid and what to return
+          +  (token-valid,"true" dt:boolean mtId:boo-eq fnId:! issuer:! mbp:f )
+          TR (res-id,"oauth-access-token-confirmation" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+          TA (act-id,"return-token-confirmation" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+        Rules(Policy)
+          Rule ( ef:Permit id:FinalRule )
+            Target(Rule)
+        Obligations(Policy)
+          Obligation ( fulfillOn:Permit id:ReturnAccessTokenValid )
+            OA (return-confirmation,"true" dt:boolean mtId:! fnId:! issuer:! mbp:f )
+
+    // This PolicySet is for the AUTHORIZATION ENDPOINT (az-endpt-uri), where the client
+    // redirects the request so the res-owner/user can authorize it. The first policy is
+    // to authorize the client-id; the second is to authenticate and authorize the user
+    // and to approve the generation of the "authorization code"
+    PolicySet (PS10-2,in:PS10) ( cb:do id:OAuth2-Az-URI-PolicySet mlev:2 desc:PS10-2,in=PS10 )
+      Target(PolicySet)
+        TR (az-endpt-uri,"http://az-svr/az-endpt/" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+
+      // This policy is to validate the client-id and to permit the starting
+      // of the resource-owner authorization process that will authenticate
+      // the res-owner and obtain authorization for the request
+      Policy (P10-2-1,in:PS10-2) ( cb:ord-po id:OAuth2-Az-URI-client-id-Policy desc:P10-2-1,in=PS10-2 )
+        Target(Policy)
+          TS (client-id,".*" dt:string mtId:rgx-mt fnId:! issuer:! mbp:f )
+          +  (scope-provided,"true" dt:boolean mtId:boo-eq fnId:! issuer:! mbp:f )
+          // This resource scope is for anything on "http://res-svr/"
+          TR (res-id,"http://res-svr/.*" dt:string mtId:rgx-mt fnId:! issuer:! mbp:f )
+          //TA (act-id,"start-req-az-process" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+        Rules(Policy)
+          Rule ( ef:Permit id:FinalRule )
+            Target(Rule)
+        // Send back the authorization endpoint URI
+        Obligations(Policy)
+          Obligation ( fulfillOn:Permit id:GetResourceOwnerAuthorization )
+            OA (az-endpt-uri,"http://az-svr/az-endpt/" dt:anyURI mtId:! fnId:! issuer:! mbp:f )
+
+      // This policy is to authenticate the resource owner and obtain authorization
+      // for the client to obtain the resource specified in the request.
+      // Also this policy causes an obligation to gen an az-token
+      Policy (P10-2-2,in:PS10-2) ( cb:ord-po id:OAuth2-Az-URI-res-own-az-Policy desc:P10-2-2,in=PS10-2 )
+        Target(Policy)
+
+	  // The subject authentication may be performed prior to evaluation or
+	  // during eval. If not done prior, then subject-authenticate will not
+	  // be present, but it is set to mbp:t, so attr-finder will be invoked
+	  // to pull creds from req-ctx and authenticate
+          TS (sub-id,"OaResOwner01" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+          +  (subject-creds,".*" dt:string mtId:rgx-mt fnId:! issuer:! mbp:f )
+          +  (subject-authenticated,"true" dt:boolean mtId:boo-eq fnId:! issuer:! mbp:t )
+
+          // The resource scope is for anything on "http://res-svr/" owned by res-owner, 
+	  // whose account is listed under name user-01, which is alias of res-owner-01,
+	  // where the res-owner-id to user-name mapping is maintained by az server
+          TR (res-id,"http://res-svr/OaResOwner01/.*" dt:string mtId:rgx-mt fnId:! issuer:! mbp:f )
+
+	  // action (oa-act-id) is that res-owner-id is approving client-id 
+          // for action requested (act-id in msg), which must be within the
+          // the res-owner's scope (act-id defined by TA line below.
+          TA (act-id,".*" dt:string mtId:rgx-mt fnId:! issuer:! mbp:f )
+          +  (oa-act-id,"approve-client" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+          +  (client-id,".*" dt:string mtId:rgx-mt fnId:! issuer:! mbp:f )
+
+        Rules(Policy)
+	  // all validation done in target so if policy applicable rule is permit
+          Rule ( ef:Permit id:FinalRule )
+            Target(Rule)
+
+        // Send back the obligation to generate the authorization code for the
+        // requested resource
+        Obligations(Policy)
+          Obligation ( fulfillOn:Permit id:AuthorizationCode )
+            OA (gen-az-code,"requested-resource" dt:anyURI mtId:! fnId:! issuer:! mbp:f )
+
+    // This PolicySet is for the TOKEN ENDPOINT for the issuance of access tokens
+    // based on valid client creds and authorization code
+    PolicySet (PS10-3,in:PS10) ( cb:do id:OAuth2-Tk-URI-PolicySet mlev:2 desc:PS10-3,in=PS10 )
+      Target(PolicySet)
+        TR (tk-endpt-uri,"http://az-svr/tk-endpt/" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+      Policy (P10-3-1,in:PS10-3) ( cb:ord-po id:OAuth2-Tk-URI-NoToken-Policy desc:P10-3-1,in=PS10-3 )
+        Target(Policy)
+          TS (sub-id,"http://www.client01.com" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+          +  (subject-creds,".*" dt:string mtId:rgx-mt fnId:! issuer:! mbp:f )
+          +  (subject-authenticated,"true" dt:boolean mtId:boo-eq fnId:! issuer:! mbp:t )
+          +  (az-code-provided,"true" dt:boolean mtId:boo-eq fnId:! issuer:! mbp:t )
+          +  (az-code-validated,"true" dt:boolean mtId:boo-eq fnId:! issuer:! mbp:t )
+          // The resource that is requested is an oauth-access-token to replace az-code
+          TR (res-id,"oauth-access-token" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+          TA (act-id,"return-access-token" dt:string mtId:str-eq fnId:! issuer:! mbp:f )
+        Rules(Policy)
+          Rule ( ef:Permit id:FinalRule )
+            Target(Rule)

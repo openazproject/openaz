@@ -1,0 +1,12 @@
+PolicySet
+Target
+  TA (act-id, "Tutorial-Read")
+Policy
+  Target
+  Rules(Policy)
+   Rule (ef:Permit)
+    Target
+      TS (sub-id, "Joe Smith")
+      TR (res-id, "C:\\\\jsmith\\\\.*" mtId:rgx-mt)
+   Rule (ef:Deny)
+    Target

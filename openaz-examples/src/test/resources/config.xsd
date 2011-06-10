@@ -1,0 +1,136 @@
+<!--
+ Copyright 2004 Sun Microsystems, Inc. All Rights Reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+
+   1. Redistribution of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+ 
+   2. Redistribution in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+
+ Neither the name of Sun Microsystems, Inc. or the names of contributors may
+ be used to endorse or promote products derived from this software without
+ specific prior written permission.
+ 
+ This software is provided "AS IS," without a warranty of any kind. ALL
+ EXPRESS OR IMPLIED CONDITIONS, REPRESENTATIONS AND WARRANTIES, INCLUDING
+ ANY IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE
+ OR NON-INFRINGEMENT, ARE HEREBY EXCLUDED. SUN MICROSYSTEMS, INC. ("SUN")
+ AND ITS LICENSORS SHALL NOT BE LIABLE FOR ANY DAMAGES SUFFERED BY LICENSEE
+ AS A RESULT OF USING, MODIFYING OR DISTRIBUTING THIS SOFTWARE OR ITS
+ DERIVATIVES. IN NO EVENT WILL SUN OR ITS LICENSORS BE LIABLE FOR ANY LOST
+ REVENUE, PROFIT OR DATA, OR FOR DIRECT, INDIRECT, SPECIAL, CONSEQUENTIAL,
+ INCIDENTAL OR PUNITIVE DAMAGES, HOWEVER CAUSED AND REGARDLESS OF THE THEORY
+ OF LIABILITY, ARISING OUT OF THE USE OF OR INABILITY TO USE THIS SOFTWARE,
+ EVEN IF SUN HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+ You acknowledge that this software is not designed or intended for use in
+ the design, construction, operation or maintenance of any nuclear facility.
+-->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://sunxacml.sourceforge.net/schema/config-0.3"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:config="http://sunxacml.sourceforge.net/schema/config-0.3"
+            elementFormDefault="qualified"
+            attributeFormDefault="unqualified">
+
+  <xsd:element name="config">
+    <xsd:complexType>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element name="pdp" type="config:PDPType"/>
+        <xsd:element name="attributeFactory"
+                     type="config:AttributeFactoryType"/>
+        <xsd:element name="combiningAlgFactory"
+                     type="config:CombiningFactoryType"/>
+        <xsd:element name="functionFactory"
+                     type="config:FunctionFactoryType"/>
+      </xsd:choice>
+    </xsd:complexType>
+    <xsd:attribute name="defaultPDP" type="xsd:string" use="required"/>
+    <xsd:attribute name="defaultAttributeFactory" type="xsd:string"
+                   use="required"/>
+    <xsd:attribute name="defaultCombiningAlgFactory" type="xsd:string"
+                   use="required"/>
+    <xsd:attribute name="defaultFunctionFactory" type="xsd:string"
+                   use="required"/>
+  </xsd:element>
+
+  <xsd:complexType name="PDPType">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="attributeFinderModule" type="config:ClassType"/>
+      <xsd:element name="resourceFinderModule" type="config:ClassType"/>
+      <xsd:element name="policyFinderModule" type="config:ClassType"/>
+    </xsd:choice>
+    <xsd:attribute name="name" type="xsd:string" use="required"/>
+  </xsd:complexType>
+
+  <xsd:complexType name="AttributeFactoryType">
+    <xsd:sequence>
+      <xsd:element name="datatype" type="config:IdentifiedType" minOccurs="0"
+                   maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="name" type="xsd:string" use="required"/>
+    <xsd:attribute name="useStandardDatatypes" type="xsd:boolean"
+                   use="optional" default="true"/>
+  </xsd:complexType>
+
+  <xsd:complexType name="CombiningFactoryType">
+    <xsd:sequence>
+      <xsd:element name="algorithm" type="config:ClassType" minOccurs="0"
+                   maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="name" type="xsd:string" use="required"/>
+    <xsd:attribute name="useStandardAlgorithms" type="xsd:boolean"
+                   use="optional" default="true"/>
+  </xsd:complexType>
+
+  <xsd:complexType name="FunctionFactoryType">
+    <xsd:sequence>
+      <xsd:element name="target" type="config:FunctionCollectionType"
+                   minOccurs="0"/>
+      <xsd:element name="condition" type="config:FunctionCollectionType"
+                   minOccurs="0"/>
+      <xsd:element name="general" type="config:FunctionCollectionType"
+                   minOccurs="0"/>
+    </xsd:sequence>
+    <xsd:attribute name="name" type="xsd:string" use="required"/>
+    <xsd:attribute name="useStandardFunctions" type="xsd:boolean"
+                   use="optional" default="true"/>
+  </xsd:complexType>
+
+  <xsd:complexType name="FunctionCollectionType">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="function" type="config:ClassType"/>
+      <xsd:element name="abstractFunction" type="config:IdentifiedType"/>
+      <xsd:element name="functionCluster" type="config:ClassType"/>
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name="IdentifiedType" mixed="true">
+    <xsd:complexContent mixed="true">
+      <xsd:extension base="config:ClassType">
+        <xsd:attribute name="identifier" type="xsd:anyURI" use="required"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="ClassType" mixed="true">
+    <xsd:complexContent mixed="true">
+      <xsd:extension base="config:ClassParametersType">
+        <xsd:attribute name="class" type="xsd:string" use="required"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="ClassParametersType" mixed="true">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="string" type="xsd:string"/>
+      <xsd:element name="list" type="config:ClassParametersType"/>
+    </xsd:choice>
+  </xsd:complexType>
+
+</xsd:schema>

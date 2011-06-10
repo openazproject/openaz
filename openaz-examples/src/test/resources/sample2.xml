@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns="http://sunxacml.sourceforge.net/schema/config-0.3"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        defaultPDP="pdp" defaultAttributeFactory="attr"
+        defaultCombiningAlgFactory="comb" defaultFunctionFactory="func">
+  <pdp name="pdp">
+    <attributeFinderModule class="com.sun.xacml.finder.impl.CurrentEnvModule"/>
+    <attributeFinderModule class="com.sun.xacml.finder.impl.SelectorModule"/>
+    <policyFinderModule class="com.sun.xacml.finder.impl.FilePolicyModule">
+      <list>
+        <string>policy/generated.xml</string>
+        <string>policy/obligation.xml</string>
+        <string>policy/selector.xml</string>
+        <string>policy/time-range.xml</string>
+      </list>
+    </policyFinderModule>
+  </pdp>
+  <attributeFactory name="attr" useStandardDatatypes="true"/>
+  <combiningAlgFactory name="comb" useStandardAlgorithms="true"/>
+  <functionFactory name="func" useStandardFunctions="true">
+    <condition>
+      <function class="TimeInRangeFunction"/>
+    </condition>
+  </functionFactory>
+</config>

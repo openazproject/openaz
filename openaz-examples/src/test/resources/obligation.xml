@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Policy xmlns="urn:oasis:names:tc:xacml:1.0:policy"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        PolicyId="ObligationPolicy"
+        RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:permit-overrides">
+
+  <Description>
+    This protects access to all documents in the "sensitive" directory.
+    All users @users.example.com are allowed to read this documents, but
+    all other access is denied. Logging is done all access attempts
+    using Obligations, though the logged information is different
+    depending on whether or not the access attempt is allowed.
+  </Description>
+
+  <Target>
+    <Subjects>
+      <Subject>
+        <SubjectMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:rfc822Name-match">
+          <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">users.example.com</AttributeValue>
+          <SubjectAttributeDesignator DataType="urn:oasis:names:tc:xacml:1.0:data-type:rfc822Name"
+                                      AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"/>
+        </SubjectMatch>
+      </Subject>
+    </Subjects>
+    <Resources>
+      <Resource>
+        <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:regexp-string-match">
+          <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">http://server.example.com/sensitive/.*</AttributeValue>
+          <ResourceAttributeDesignator DataType="http://www.w3.org/2001/XMLSchema#string"
+                                       AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id"/>
+        </ResourceMatch>
+      </Resource>
+    </Resources>
+    <Actions>
+      <AnyAction/>
+    </Actions>
+  </Target>
+
+  <Rule RuleId="AllowAllReads" Effect="Permit">
+    <Target>
+      <Subjects>
+        <AnySubject/>
+      </Subjects>
+      <Resources>
+        <AnyResource/>
+      </Resources>
+      <Actions>
+        <Action>
+          <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+            <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">read</AttributeValue>
+            <ActionAttributeDesignator DataType="http://www.w3.org/2001/XMLSchema#string"
+                                       AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id"/>
+          </ActionMatch>
+        </Action>
+      </Actions>
+    </Target>
+  </Rule>
+    
+  <Rule RuleId="DenyOtherActions" Effect="Deny"/>
+
+  <Obligations>
+    <Obligation ObligationId="LogSuccessfulRead" FulfillOn="Permit">
+      <AttributeAssignment AttributeId="user" DataType="http://www.w3.org/2001/XMLSchema#anyURI">urn:oasis:names:tc:xacml:1.0:subject:subject-id</AttributeAssignment>
+      <AttributeAssignment AttributeId="resource" DataType="http://www.w3.org/2001/XMLSchema#anyURI">urn:oasis:names:tc:xacml:1.0:resource:resource-id</AttributeAssignment>
+    </Obligation>
+    <Obligation ObligationId="LogInvalidAccess" FulfillOn="Deny">
+      <AttributeAssignment AttributeId="user" DataType="http://www.w3.org/2001/XMLSchema#anyURI">urn:oasis:names:tc:xacml:1.0:subject:subject-id</AttributeAssignment>
+      <AttributeAssignment AttributeId="resource" DataType="http://www.w3.org/2001/XMLSchema#anyURI">urn:oasis:names:tc:xacml:1.0:resource:resource-id</AttributeAssignment>
+      <AttributeAssignment AttributeId="action" DataType="http://www.w3.org/2001/XMLSchema#anyURI">urn:oasis:names:tc:xacml:1.0:action:action-id</AttributeAssignment>
+    </Obligation>
+  </Obligations>
+
+</Policy>

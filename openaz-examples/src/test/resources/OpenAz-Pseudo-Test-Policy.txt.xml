@@ -1,0 +1,70 @@
+<PolicySet PolicySetId="dummyPolicySetId-LineNumber-1" PolicyCombiningAlgId="urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:permit-overrides">
+<Description>PolicySet at Line Number 1</Description>
+<Target>
+<Subjects>
+<AnySubject/>
+</Subjects>
+<Resources>
+<AnyResource/>
+</Resources>
+<Actions>
+<Action>
+<ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Tutorial-Read</AttributeValue>
+<ActionAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+</ActionMatch>
+</Action>
+</Actions>
+</Target>
+<Policy PolicyId="dummyPolicyId-LineNumber-4" RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:permit-overrides">
+<Description>Policy at Line Number 4</Description>
+<PolicyDefaults><XPathVersion>http://www.w3.org/TR/1999/Rec-xpath-19991116</XPathVersion></PolicyDefaults>
+<Target>
+<Subjects>
+<AnySubject/>
+</Subjects>
+<Resources>
+<AnyResource/>
+</Resources>
+<Actions>
+<AnyAction/>
+</Actions>
+</Target>
+<Rule RuleId="dummyRuleId-LineNumber-7" Effect="Permit">
+<Target>
+<Subjects>
+<Subject>
+<SubjectMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Joe Smith</AttributeValue>
+<SubjectAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+</SubjectMatch>
+</Subject>
+</Subjects>
+<Resources>
+<Resource>
+<ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:regexp-string-match">
+<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">C:\\\\jsmith\\\\.*</AttributeValue>
+<ResourceAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+</ResourceMatch>
+</Resource>
+</Resources>
+<Actions>
+<AnyAction/>
+</Actions>
+</Target>
+</Rule>
+<Rule RuleId="dummyRuleId-LineNumber-11" Effect="Deny">
+<Target>
+<Subjects>
+<AnySubject/>
+</Subjects>
+<Resources>
+<AnyResource/>
+</Resources>
+<Actions>
+<AnyAction/>
+</Actions>
+</Target>
+</Rule>
+</Policy>
+</PolicySet>

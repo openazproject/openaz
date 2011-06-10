@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns="http://sunxacml.sourceforge.net/schema/config-0.3"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        defaultPDP="supportsXPath" defaultAttributeFactory="attr"
+        defaultCombiningAlgFactory="comb" defaultFunctionFactory="func">
+  <pdp name="supportsXPath">
+    <attributeFinderModule class="com.sun.xacml.finder.impl.CurrentEnvModule"/>
+    <attributeFinderModule class="com.sun.xacml.finder.impl.SelectorModule"/>
+  </pdp>
+  <pdp name="noXPath">
+    <attributeFinderModule class="com.sun.xacml.finder.impl.CurrentEnvModule"/>
+  </pdp>
+  <attributeFactory name="attr" useStandardDatatypes="false">
+    <datatype class="com.sun.xacml.attr.proxy.BooleanAttributeProxy"
+              identifier="http://www.w3.org/2001/XMLSchema#boolean"/>
+    <datatype class="com.sun.xacml.attr.proxy.StringAttributeProxy"
+              identifier="http://www.w3.org/2001/XMLSchema#string"/>
+    <datatype class="com.sun.xacml.attr.proxy.DateAttributeProxy"
+              identifier="http://www.w3.org/2001/XMLSchema#date"/>
+    <datatype class="com.sun.xacml.attr.proxy.TimeAttributeProxy"
+              identifier="http://www.w3.org/2001/XMLSchema#time"/>
+    <datatype class="com.sun.xacml.attr.proxy.DateTimeAttributeProxy"
+              identifier="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <datatype class="com.sun.xacml.attr.proxy.DayTimeDurationAttributeProxy"
+              identifier="http://www.w3.org/TR/2002/WD-xquery-operators-20020816#dayTimeDuration"/>
+    <datatype class="com.sun.xacml.attr.proxy.YearMonthDurationAttributeProxy"
+              identifier="http://www.w3.org/TR/2002/WD-xquery-operators-20020816#yearMonthDuration"/>
+    <datatype class="com.sun.xacml.attr.proxy.DoubleAttributeProxy"
+              identifier="http://www.w3.org/2001/XMLSchema#double"/>
+    <datatype class="com.sun.xacml.attr.proxy.IntegerAttributeProxy"
+              identifier="http://www.w3.org/2001/XMLSchema#integer"/>
+    <datatype class="com.sun.xacml.attr.proxy.AnyURIAttributeProxy"
+              identifier="http://www.w3.org/2001/XMLSchema#anyURI"/>
+    <datatype class="com.sun.xacml.attr.proxy.HexBinaryAttributeProxy"
+              identifier="http://www.w3.org/2001/XMLSchema#hexBinary"/>
+    <datatype class="com.sun.xacml.attr.proxy.Base64BinaryAttributeProxy"
+              identifier="http://www.w3.org/2001/XMLSchema#base64binary"/>
+    <datatype class="com.sun.xacml.attr.proxy.X500NameAttributeProxy"
+              identifier="urn:oasis:names:tc:xacml:1.0:data-type:x500Name"/>
+    <datatype class="com.sun.xacml.attr.proxy.RFC822NameAttributeProxy"
+              identifier="urn:oasis:names:tc:xacml:1.0:data-type:rfc822Name"/>
+  </attributeFactory>
+  <combiningAlgFactory name="comb" useStandardAlgorithms="false">
+    <algorithm class="com.sun.xacml.combine.DenyOverridesPolicyAlg"/>
+    <algorithm class="com.sun.xacml.combine.OrderedDenyOverridesPolicyAlg"/>
+    <algorithm class="com.sun.xacml.combine.DenyOverridesRuleAlg"/>
+    <algorithm class="com.sun.xacml.combine.OrderedDenyOverridesRuleAlg"/>
+    <algorithm class="com.sun.xacml.combine.PermitOverridesPolicyAlg"/>
+    <algorithm class="com.sun.xacml.combine.OrderedPermitOverridesPolicyAlg"/>
+    <algorithm class="com.sun.xacml.combine.PermitOverridesRuleAlg"/>
+    <algorithm class="com.sun.xacml.combine.OrderedPermitOverridesRuleAlg"/>
+    <algorithm class="com.sun.xacml.combine.FirstApplicablePolicyAlg"/>
+    <algorithm class="com.sun.xacml.combine.FirstApplicableRuleAlg"/>
+    <algorithm class="com.sun.xacml.combine.OnlyOneApplicablePolicyAlg"/>
+  </combiningAlgFactory>
+  <functionFactory name="func" useStandardFunctions="false">
+    <target>
+      <functionCluster class="com.sun.xacml.cond.cluster.EqualFunctionCluster"/>
+      <functionCluster class="com.sun.xacml.cond.cluster.LogicalFunctionCluster"/>
+      <functionCluster class="com.sun.xacml.cond.cluster.NOfFunctionCluster"/>
+
+      <!-- there is a cluster for this function, but a single function -->
+      <!-- is used instead just as an example of how this works -->
+      <function class="com.sun.xacml.cond.NotFunction">
+        <string>urn:oasis:names:tc:xacml:1.0:function:not</string>
+      </function>
+
+      <functionCluster class="com.sun.xacml.cond.cluster.ComparisonFunctionCluster"/>
+      <functionCluster class="com.sun.xacml.cond.cluster.MatchFunctionCluster"/>
+    </target>
+    <condition>
+      <functionCluster class="com.sun.xacml.cond.cluster.ConditionBagFunctionCluster"/>
+      <functionCluster class="com.sun.xacml.cond.cluster.ConditionSetFunctionCluster"/>
+      <functionCluster class="com.sun.xacml.cond.cluster.HigherOrderFunctionCluster"/>
+    </condition>
+
+    <general>
+      <functionCluster class="com.sun.xacml.cond.cluster.AddFunctionCluster"/>
+      <functionCluster class="com.sun.xacml.cond.cluster.SubtractFunctionCluster"/>
+      <functionCluster class="com.sun.xacml.cond.cluster.MultiplyFunctionCluster"/>
+      <functionCluster class="com.sun.xacml.cond.cluster.DivideFunctionCluster"/>
+      <functionCluster class="com.sun.xacml.cond.cluster.ModFunctionCluster"/>
+      <functionCluster class="com.sun.xacml.cond.cluster.AbsFunctionCluster"/>
+      <functionCluster class="com.sun.xacml.cond.cluster.RoundFunctionCluster"/>
+      <functionCluster class="com.sun.xacml.cond.cluster.FloorFunctionCluster"/>
+      <functionCluster class="com.sun.xacml.cond.cluster.DateMathFunctionCluster"/>
+      <functionCluster class="com.sun.xacml.cond.cluster.GeneralBagFunctionCluster"/>
+      <functionCluster class="com.sun.xacml.cond.cluster.NumericConvertFunctionCluster"/>
+      <functionCluster class="com.sun.xacml.cond.cluster.StringNormalizeFunctionCluster"/>
+      <functionCluster class="com.sun.xacml.cond.cluster.GeneralSetFunctionCluster"/>
+      <abstractFunction class="com.sun.xacml.cond.MapFunctionProxy"
+                        identifier="urn:oasis:names:tc:xacml:1.0:function:map"/>
+    </general>
+  </functionFactory>
+</config>

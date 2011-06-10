@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Policy xmlns="urn:oasis:names:tc:xacml:1.0:policy"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="urn:oasis:names:tc:xacml:1.0:context"
+        xmlns:memos="urn:example:documents"
+        PolicyId="SelectorPolicy"
+        RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:permit-overrides">
+
+  <Description>
+    This policy applies to anyone trying to read a memo from the memo
+    directory. Memos contain their target audience (a group), and only
+    if the Subject is in that group are they allowed access.
+  </Description>
+
+  <PolicyDefaults>
+    <XPathVersion>http://www.w3.org/TR/1999/Rec-xpath-19991116</XPathVersion>
+  </PolicyDefaults>
+
+  <Target>
+    <Subjects>
+      <AnySubject/>
+    </Subjects>
+    <Resources>
+      <Resource>
+        <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:regexp-string-match">
+          <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">http://server.example.com/memos/.*</AttributeValue>
+          <ResourceAttributeDesignator DataType="http://www.w3.org/2001/XMLSchema#string"
+                                       AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id"/>
+        </ResourceMatch>
+      </Resource>
+    </Resources>
+    <Actions>
+      <Action>
+        <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+          <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">read</AttributeValue>
+          <ActionAttributeDesignator DataType="http://www.w3.org/2001/XMLSchema#string"
+                                     AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id"/>
+        </ActionMatch>
+      </Action>
+    </Actions>
+  </Target>
+
+  <Rule RuleId="AccessIfInGroup" Effect="Permit">
+    <Condition FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-is-in">
+      <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-one-and-only">
+        <SubjectAttributeDesignator DataType="http://www.w3.org/2001/XMLSchema#string"
+                                    AttributeId="group"/>
+      </Apply>
+      <AttributeSelector RequestContextPath="//context:ResourceContent/memos:Memo/memos:Audience/text()" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+    </Condition>
+  </Rule>
+
+</Policy>

@@ -1,0 +1,226 @@
+
+!******************
+
+    8/2/10:
+
+	These notes are intended to give "guidance" for using
+	the log capabilities that are packaged with OpenAz.
+
+	To jump to the "essentials", see "How to config" below:
+
+
+      Logging Guide:
+
+	OpenAz uses the Apache Commons Logging (JCL) interface
+	to enable flexible configurable logging.
+
+	Apache JCL is similar in concept to OpenAz AzApi in the
+	sense that Apache JCL provides a common interface for a 
+	specific function (logging), whereas AzApi provides a
+	common interface for another specific function (XACML-
+	compatible authorization calls).
+
+	OpenAz for the most part, uses the log.trace function,
+	which means that no logging will be displayed unless
+	one "turns on" the "trace" level logging.
+
+	The "trick" with Apache JCL is that one has to know how
+	to configure both 
+
+	  1. the JCL itself (apache.commons.logging),
+
+	  2. and the underlying logging provider, such as:
+
+	    - java.util.logging (the native Java logging capabilities).
+	    - apache.commons.logging.util.SimpleLog (a simple,
+		but surprisingly robust basic logging capability
+		packaged with apache.
+	    - log4j. 
+
+	Details on configuring the Apache JCL may be found here:
+	  http://jakarta.apache.org/commons/logging/apidocs/org/apache/commons/logging/package-summary.html
+
+	However, the following brief summary may be helpful to
+	understand the larger context in which the details of the
+	specific logging configuration fit.
+
+	First, it is important to recognize that different applications
+	or system utilities may not use JCL and therefore must be
+	configured using the native logging used by that appl or utility.
+
+	In the case of OpenAz, OpenAz only uses JCL, so it may be
+	used with any logging capability that is a provider for JCL.
+	Apache JCL Impl (apache.commons.logging.impl) comes with 
+	3 providers:
+
+	  - Jdk14Logger (org.apache.commons.logging.impl.Jdk14Logger)
+		(wraps the java.util.logging capabilities)
+
+	  - SimpleLog   (org.apache.commons.logging.impl.SimpleLog)
+		(wraps the apache SimpleLog capabilities)
+
+	  - Log4JLogger (org.apache.commons.logging.impl.Log4JLogger)
+		(wraps the log4J capabilities)
+
+	  - others (Avalon, legacy Apache) (not discussed here)
+
+	With all that "overview" what it really amounts to is the 
+	following:
+
+	  - by default, OpenAz puts out minimal information, where
+		the intention is to only give "sanity check" info
+		as to what is going on. So, if one does not want
+		to look at log messages, one does not have to
+		do anything.
+
+	  - if you want to see log messages, the guide that follows
+		shows a couple simple example use cases that should
+		give the flavor of what one needs to do to view the
+		log messages.
+
+
+      Guide to using "out of the box" logging w OpenAz:
+
+	Configuring logging is optional, and OpenAz will run
+	without any special logging configuration. However, if
+	one wants to view log info, then the following directions
+	will provide some guidance not generally found elsewhere,
+	or at least anywhere that is "easy" to find. The single
+	most useful guide this author found is here:
+
+	  http://wiki.apache.org/commons/How_to_Configure_the_Logging_Factory_and_the_Logging_Class
+
+	However, even that doc and its links appear to make some
+	assumptions about the reader's knowledge, which, in
+	some cases, may still leave the reader without enough
+	detail to sensibly start the configuration process.
+
+	OpenAz does not implement any specific logging features,
+	and only uses the apache JCL (Java Commmons Logging) API,
+	which primarily consists of the following api calls:
+
+		log.fatal(String msg)	(level = 6)
+		log.error(String msg)	(level = 5)
+		log.warn(String msg)	(level = 4)
+		log.info(String msg)	(level = 3)
+		log.debug(String msg)	(level = 2)
+		log.trace(String msg)	(level = 1)
+
+	where the logging is configured to be at a certain level, m,
+	and where log messages of level m and above get output.
+
+	Configuring the logging is easy in concept, but can be 
+	difficult, or simply confusing, in specific environments, 
+	as will be explained.
+
+	OpenAz ships with 2 logging config files that are in
+
+		<TOPOFPROJECT>/openaz/test/config/logging
+
+	Those files are named:
+		commons-logging.properties (the Apache JCL config file)
+		simplelog.properties (the SimpleLog config file)
+
+	In order for those files to take effect, they need to be
+	copied to:
+		<TOPOFPROJECT>/openaz/test/bin
+
+	which is on the project classpath, and enables them to be
+	read when any of the openaz programs are launched. The default
+	files are stored there initially, but may be destroyed by
+	an ant build and need to be replaced.
+
+	<TOPOFPROJECT> refers to:
+	   - the directory path to the directory containing the 
+	     openaz directory, which is the top directory when 
+	     one unzips the openaz download.
+
+	There is an additional "helper file":
+		holding-file.txt
+
+	which contains a copy of the default data for the .properties
+	files, as well as other options that could be used instead of
+	the default settings, as well as some additional config info.
+
+    How to config:
+
+	Once the files are in <TOPOFPROJECT>/openaz/test/bin, they
+	can be edited to customize the config. Example edits are
+	given in holding-file.txt.
+
+      The essentials to know, if you want to use SimpleLog, are:
+
+	  1. in commons-logging.properties, the variable:
+		org.apache.commons.logging.Log 
+	     specifies the name of the Log impl class 
+	       (that is the class that implements the 
+	       org.apache.commons.logging.Log interface).
+
+	     That impl class will be loaded and used by the OpenAz 
+	     modules at runtime. i.e. this is the class that does
+	     the actual logging that is called by Apache JCL	
+	     interface modules used by the OpenAz modules.
+
+	  2. in both 
+		commons-logging.properties and 
+		simplelog.properties
+	     there is a variable named:
+		org.apache.commons.logging.simplelog.defaultlog 
+	     the value of which specifiles the level of logging
+	     that will be done for the modules within scope.
+
+		Note: the "scope" of this variable when defined by
+		one or the other of these properties files appears
+		to have some "overlap". This author found that the
+		"safest" strategy was to specify this variable in
+		both files and give it the same value in each. The
+		variable in simplelog.properties appears to have the
+		broader scope and is well known to SimpleLog.
+		TODO: unambiguously resolve this "issue"
+
+      It is also "essential" to be aware of the following:
+
+	  3. The java.util.logging interface will be used if nothing
+	     else is specified, and it will be used thru the 
+	     Jdk14Logger.
+
+	     NOTE: this can occur even if the properties files that
+	     were loaded into <TOPOFPROJECT>/openaz/test/bin above
+	     and configured as described. This is because, depending
+	     on the security settings in:
+		<TOPOFJAVAINSTALL>/jre/security/java.policy
+	     the running OpenAz module may not have access to the
+	     files in <TOPOFPROJECT>/openaz/test/bin. In order to
+	     grant access to these files, the following lines may
+	     be added to java.policy:
+
+  	permission java.io.FilePermission "<TOPOFPROJECT>\\openaz\\test\\policy\\TestAzApi-GeneratedPolicy.xml", "read";
+  	permission java.io.FilePermission "<TOPOFPROJECT>\\openaz\\test\\bin\\commons-logging.properties", "read";
+  	permission java.io.FilePermission "<TOPOFPROJECT>\\openaz\\test\\bin\\simplelog.properties", "read";
+  	permission java.io.FilePermission "<TOPOFPROJECT>\\openaz\\test\\bin\\log.props", "read";
+  	permission java.io.FilePermission "<TOPOFJAVAINSTALL>\\jre\\lib\\logging.properties", "read";
+
+	     The first file listed above is the policy file that may be
+	     needed by sunxacml. Basically, you may need to grant privs
+	     to "<TOPOFPROJECT>\\openaz\\test\\policy\\-", where the 
+	     trailing "-" indicates all files in that dir and subdirs.
+	     This has nothing to do w logging, but is FYI.
+
+	     The next two FilePermissions are to commons-logging.properties
+	     and simplelog.properties, as described above.
+
+	     The next line enables the OpenAz module to access the 
+	     sunxacml logging config file: log.props. This may be 
+	     activated for "trace" by specifying "FINEST", which is
+	     the java.util.logging equivalent, fpp, of "trace".
+
+	     Finally, is sunxacml logging is needed then a similar
+	     action may be necessary to grant access to the jre/lib
+	     file: logging.properties.
+
+	  4. If java.util.logging is what is desired, then remove the
+	     commons-logging.properties file and simplelog.properties
+	     from the openaz/test/bin directory, and you may configure
+	     the default Log, Jdk14Logger, automatically, and control
+	     its settings from logging.properties.
+
