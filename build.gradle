@@ -1,0 +1,39 @@
+allprojects  {
+	apply plugin: 'java'
+	apply plugin: 'maven'
+	apply plugin: 'eclipse'
+
+	group = 'org.openliberty'
+	version = '0.0.1-SNAPSHOT'
+
+	configurations.compile.transitive = true
+	
+	repositories {
+	 // First check local cache before accessing central repository
+        mavenRepo name:'Local', urls: "file://" + System.properties['user.home'] + "/.m2/repository"
+ 		mavenRepo urls: ["http://repo1.maven.org/maven2"]
+ 		mavenRepo urls: ["http://repository.jboss.org/nexus/content/groups/public/"]
+	}
+}
+
+subprojects {
+	sourceCompatibility = 1.6
+	targetCompatibility = 1.6
+	
+	dependencies {
+		testCompile "junit:junit:4.8.2"
+		compile "commons-logging:commons-logging:1.1.1"
+	}
+	
+	
+	
+}
+
+
+
+dependsOnChildren()
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.0-milestone-3'
+}
+

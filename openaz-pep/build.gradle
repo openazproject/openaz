@@ -1,0 +1,4 @@
+	dependencies {
+	compile project(':openaz-api')
+	compile project(':openaz-pdp')
+	}

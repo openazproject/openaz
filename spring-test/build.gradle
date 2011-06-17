@@ -1,0 +1,9 @@
+dependencies {
+	compile project(':openaz-pep')
+	compile "org.springframework:spring-test:3.0.5.RELEASE"
+	compile "org.springframework:spring-core:3.0.5.RELEASE"
+	compile "org.springframework:spring-beans:3.0.5.RELEASE"
+	compile "org.springframework:spring-context:3.0.5.RELEASE"
+	compile project(':openaz-api')
+	compile project(':openaz-pdp')
+}

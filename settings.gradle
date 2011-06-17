@@ -1,0 +1,1 @@
+include 'openaz-api', 'openaz-pdp', 'openaz-pep', 'openaz-examples', 'spring-test'

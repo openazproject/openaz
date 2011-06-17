@@ -1,0 +1,4 @@
+dependencies {
+	compile "org.codehaus.fabric3.fabric3-db-exist:sunxacml:1.0"
+	compile project(':openaz-api')
+}
