@@ -1,3 +1,5 @@
+defaultTasks 'build'
+ 
 allprojects  {
 	apply plugin: 'java'
 	apply plugin: 'maven'
@@ -9,7 +11,7 @@ allprojects  {
 	configurations.compile.transitive = true
 	
 	repositories {
-	 // First check local cache before accessing central repository
+	 	// First check local cache before accessing central repository
         mavenRepo name:'Local', urls: "file://" + System.properties['user.home'] + "/.m2/repository"
  		mavenRepo urls: ["http://repo1.maven.org/maven2"]
  		mavenRepo urls: ["http://repository.jboss.org/nexus/content/groups/public/"]
@@ -25,8 +27,12 @@ subprojects {
 		compile "commons-logging:commons-logging:1.1.1"
 	}
 	
-	
-	
+	jar {
+ 		from(project.sourceSets.main.java) {
+   		into 'OSGI-OPT/src'
+ 		}
+	}
+		
 }
 
 
